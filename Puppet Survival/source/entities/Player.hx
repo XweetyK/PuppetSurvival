@@ -17,10 +17,18 @@ enum Estados
 class Player extends FlxSprite
 {
 	public var states(get, null):Estados;
-	public function new(?X:Float = 0, ?Y:Float = 0, ?SimpleGraphic:FlxGraphicAsset) 
+	public function new(?X:Float = 0, ?Y:Float = 0)
 	{
-		super(X, Y, SimpleGraphic);
-		makeGraphic(32, 32, FlxColor.CYAN);
+		super(X, Y);
+		
+		loadGraphic(AssetPaths.cris__png, true, 60, 75);
+		
+		animation.add("idle", [0, 1, 2, 3], 8, true);
+		animation.add("walk", [4,5,6,7,8,9], 8, true);
+		animation.add("jump", [10, 11, 12, 13, 14], 8, true);
+		animation.add("fall", [15,16], 8, true);
+		animation.add("attack", [18,19,20,21,22], 8, true);
+		
 		states = IDLE;
 		acceleration.y = Reg.gravity;
 	}
@@ -35,6 +43,7 @@ class Player extends FlxSprite
 		switch (states)
 		{
 			case Estados.IDLE:
+				animation.play("idle");
 				move();
 				jump();
 				if (velocity.y < 0)
@@ -42,6 +51,7 @@ class Player extends FlxSprite
 				else if (velocity.x != 0)
 					states = Estados.WALK;
 			case Estados.WALK:
+				animation.play("walk");
 				move();
 				jump();
 				if (velocity.y !=0)
@@ -49,6 +59,7 @@ class Player extends FlxSprite
 				else if (velocity.x == 0)
 					states = Estados.IDLE;
 			case Estados.JUMP:
+				animation.play("jump");
 				move();
 				if (velocity.y == 0)
 				{
@@ -73,7 +84,7 @@ class Player extends FlxSprite
 	private function jump():Void
 	{
 		if (FlxG.keys.justPressed.UP && isTouching(FlxObject.FLOOR))
-			velocity.y -= 450;
+			velocity.y -= 700;
 	}
 	function get_states():Estados
 	{
