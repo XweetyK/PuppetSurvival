@@ -6,7 +6,9 @@ package;
  */
 class Reg 
 {
-	public static inline var gravity:Float = 1500;
-	public static inline var seleccPlaya:Float=1;
+	static public var gravity:Float = 1500;
+	static public var level:Int = 1;
+	static public var keys:Int = 0;
+	static public var deaths:Int = 0;
 	
 }

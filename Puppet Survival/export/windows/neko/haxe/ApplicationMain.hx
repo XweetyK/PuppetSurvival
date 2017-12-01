@@ -515,7 +515,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "68",
+			build: "330",
 			company: "Leo",
 			file: "PuppetSurvival",
 			fps: 60,
